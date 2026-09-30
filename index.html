@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 TO 8TH MARKS REGISTER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-header: #1d3557;
+            --btn-blue: #0284c7;
+            --btn-green: #15803d;
+            --btn-red: #dc2626;
+            --border-color: #cbd5e1;
+            --bg-body: #f8fafc;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: var(--bg-body);
+            margin: 0;
+            padding: 12px;
+            color: #0f172a;
+        }
+
+        .school-header-banner {
+            background-color: var(--navy-header);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .school-header-banner input {
+            background: transparent;
+            border: 1px dashed #93c5fd;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            width: 80%;
+            padding: 4px;
+        }
+
+        .school-header-banner h3 {
+            margin: 6px 0 0 0;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--navy-header);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #334155;
+        }
+
+        .form-group input, .form-group select {
+            padding: 7px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        button {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
+            color: white;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-save { background-color: var(--btn-green); }
+        .btn-reset { background-color: var(--btn-red); }
+        .btn-print { background-color: var(--navy-header); }
+        .btn-a3 { background-color: var(--btn-blue); }
+
+        button:hover { opacity: 0.9; }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid #94a3b8;
+            padding: 5px 3px;
+        }
+
+        .ds-th-main { background-color: #1e3a8a; color: white; }
+        .ds-th-fa1 { background-color: #0d9488; color: white; }
+        .ds-th-fa2 { background-color: #0284c7; color: white; }
+        .ds-th-sa1 { background-color: #ea580c; color: white; }
+        .ds-th-fa3 { background-color: #0d9488; color: white; }
+        .ds-th-fa4 { background-color: #0284c7; color: white; }
+        .ds-th-sa2 { background-color: #ea580c; color: white; }
+        .ds-th-total { background-color: #14532d; color: white; }
+        .ds-sub-th { background-color: #e0f2fe; color: #0f172a; font-weight: bold; }
+
+        .sem-row { background-color: #f1f5f9; font-weight: bold; }
+        .final-row { background-color: #dcfce7; font-weight: bold; }
+
+        .editable-input {
+            width: 45px;
+            text-align: center;
+            border: 1px solid #cbd5e1;
+            border-radius: 3px;
+            padding: 2px;
+            font-size: 11px;
+        }
+
+        .editable-grade-input {
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #cbd5e1;
+            border-radius: 3px;
+            padding: 2px;
+            text-transform: uppercase;
+        }
+
+        .footer-credit {
+            background-color: var(--navy-header);
+            color: white;
+            text-align: center;
+            padding: 6px;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .prepared-by-container {
+            margin-top: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .prepared-by-container input {
+            padding: 4px 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        .prepared-by-container.hide-print {
+            display: none !important;
+        }
+
+        .delete-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            padding: 0;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            .no-print { display: none !important; }
+            body { padding: 0; background-color: white; }
+            .card { border: none; box-shadow: none; padding: 0; margin-bottom: 10px; }
+
+            .prepared-by-container input {
+                border: none;
+                background: transparent;
+            }
+
+            body.print-individual #consolidatedSection { display: none !important; }
+            body.print-consolidated #dataEntryCard { display: none !important; }
+            body.print-consolidated #individualSection { display: none !important; }
+
+            .editable-input, .editable-grade-input { border: none; background: transparent; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- SCHOOL BANNER -->
+<div class="school-header-banner">
+    <input type="text" id="schoolName" value="ಶಾಲೆಯ ಹೆಸರು ನಮೂದಿಸಿ (Enter School Name)">
+    <h3>6 TO 8TH CLASS MARKS REGISTER</h3>
+</div>
+
+<!-- DATA ENTRY SECTION -->
+<div class="card no-print" id="dataEntryCard">
+    <div class="card-title">📝 ಮಾಹಿತಿ ದಾಖಲಾತಿ ವಿಭಾಗ (Data Entry Screen - 6th to 8th)</div>
+    
+    <form id="dataForm">
+        <div class="form-grid">
+            <!-- Class Selection Dropdown -->
+            <div class="form-group">
+                <label>ತರಗತಿ (Class) *</label>
+                <select id="classSelect" onchange="onClassChange()" required>
+                    <option value="">-- ತರಗತಿ ಆಯ್ಕೆಮಾಡಿ / Select Class --</option>
+                    <option value="Class 6">Class 6 (6ನೇ ತರಗತಿ)</option>
+                    <option value="Class 7">Class 7 (7ನೇ ತರಗತಿ)</option>
+                    <option value="Class 8">Class 8 (8ನೇ ತರಗತಿ)</option>
+                </select>
+            </div>
+
+            <!-- Subject Selection (6 Subjects) -->
+            <div class="form-group">
+                <label>ವಿಷಯ (Subject) *</label>
+                <select id="subjectSelect" required>
+                    <option value="">-- ವಿಷಯ ಆಯ್ಕೆಮಾಡಿ / Select Subject --</option>
+                    <option value="kannada">Kannada (ಕನ್ನಡ)</option>
+                    <option value="english">English (ಇಂಗ್ಲಿಷ್)</option>
+                    <option value="hindi">Hindi (ಹಿಂದಿ)</option>
+                    <option value="maths">Mathematics (ಗಣಿತ)</option>
+                    <option value="science">Science (ವಿಜ್ಞಾನ)</option>
+                    <option value="social">Social Science (ಸಮಾಜ ವಿಜ್ಞಾನ)</option>
+                </select>
+            </div>
+
+            <!-- Student Selection Dropdown with + Add New Student -->
+            <div class="form-group">
+                <label>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು (Student Name) *</label>
+                <select id="studentSelect" onchange="handleStudentSelect(this)" required>
+                    <option value="">-- ವಿದ್ಯಾರ್ಥಿ ಆಯ್ಕೆಮಾಡಿ --</option>
+                    <option value="__ADD_NEW__">+ ಹೊಸ ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸಿ (+ Add New Student)</option>
+                </select>
+            </div>
+
+            <!-- Assessment Selection (FA1-FA4: 10%, SA1-SA2: 30%) -->
+            <div class="form-group">
+                <label>ಮೌಲ್ಯಮಾಪನ ವಿವರ (Assessment) *</label>
+                <select id="assessmentSelect" required>
+                    <option value="">-- ಮೌಲ್ಯಮಾಪನ ಆಯ್ಕೆಮಾಡಿ --</option>
+                    <option value="FA-1">FA-1 (10%)</option>
+                    <option value="FA-2">FA-2 (10%)</option>
+                    <option value="SA-1">SA-1 (30%)</option>
+                    <option value="FA-3">FA-3 (10%)</option>
+                    <option value="FA-4">FA-4 (10%)</option>
+                    <option value="SA-2">SA-2 (30%)</option>
+                </select>
+            </div>
+
+            <!-- Max Marks -->
+            <div class="form-group">
+                <label>ಗರಿಷ್ಠ ಅಂಕ (Max Marks) *</label>
+                <input type="number" id="maxMarks" value="50" min="1" required placeholder="15, 25, 40, 50, 80">
+            </div>
+
+            <!-- Obtained Marks -->
+            <div class="form-group">
+                <label>ಪಡೆದ ಅಂಕ (Obtained Marks) *</label>
+                <input type="number" id="obtainedMarks" min="0" placeholder="ಪಡೆದ ಅಂಕ" required>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn-save">💾 ಸೇವ್ ಮಾಡಿ (Save Data)</button>
+        </div>
+    </form>
+</div>
+
+<!-- INDIVIDUAL MARKS REGISTER / DATA SHEET -->
+<div class="card" id="individualSection">
+    <div class="card-title">
+        <span>📊 ಮೌಲ್ಯಮಾಪನ ದತ್ತಾಂಶ ಶೀಟ್ (Individual Marks Register - 6 to 8th)</span>
+        <div class="no-print" style="display: flex; gap: 8px;">
+            <button type="button" class="btn-reset" onclick="clearData()">🗑 ಎಲ್ಲಾ ಡೇಟಾ ಅಳಿಸಿ (Reset)</button>
+            <button type="button" class="btn-print" onclick="triggerPrint('individual')">🖨️ ಪ್ರಿಂಟ್ ಮಾಡಿ (Print Report)</button>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" class="ds-th-main">ಕ್ರ.ಸಂ</th>
+                    <th rowspan="2" class="ds-th-main">ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th>
+                    <th colspan="3" class="ds-th-fa1">FA-1 (10%)</th>
+                    <th colspan="3" class="ds-th-fa2">FA-2 (10%)</th>
+                    <th colspan="3" class="ds-th-sa1">SA-1 (30%)</th>
+                    <th colspan="3" class="ds-th-fa3">FA-3 (10%)</th>
+                    <th colspan="3" class="ds-th-fa4">FA-4 (10%)</th>
+                    <th colspan="3" class="ds-th-sa2">SA-2 (30%)</th>
+                    <th colspan="3" class="ds-th-total">ಒಟ್ಟು ಮೌಲ್ಯಮಾಪನ<br>(Total 100%)</th>
+                    <th rowspan="2" class="ds-th-main">ಕ್ರಿಯೆ</th>
+                </tr>
+                <tr>
+                    <!-- FA-1 -->
+                    <th class="ds-sub-th">ಪಡೆದ ಅಂಕ</th><th class="ds-sub-th">10%</th><th class="ds-sub-th">Grade</th>
+                    <!-- FA-2 -->
+                    <th class="ds-sub-th">ಪಡೆದ ಅಂಕ</th><th class="ds-sub-th">10%</th><th class="ds-sub-th">Grade</th>
+                    <!-- SA-1 -->
+                    <th class="ds-sub-th">ಪಡೆದ ಅಂಕ</th><th class="ds-sub-th">30%</th><th class="ds-sub-th">Grade</th>
+                    <!-- FA-3 -->
+                    <th class="ds-sub-th">ಪಡೆದ ಅಂಕ</th><th class="ds-sub-th">10%</th><th class="ds-sub-th">Grade</th>
+                    <!-- FA-4 -->
+                    <th class="ds-sub-th">ಪಡೆದ ಅಂಕ</th><th class="ds-sub-th">10%</th><th class="ds-sub-th">Grade</th>
+                    <!-- SA-2 -->
+                    <th class="ds-sub-th">ಪಡೆದ ಅಂಕ</th><th class="ds-sub-th">30%</th><th class="ds-sub-th">Grade</th>
+                    <!-- TOTAL -->
+                    <th class="ds-sub-th">ಪಡೆದ ಅಂಕ (100)</th><th class="ds-sub-th">%</th><th class="ds-sub-th">Grade</th>
+                </tr>
+            </thead>
+            <tbody id="dataSheetBody">
+                <!-- Dynamically filled -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PREPARED BY SECTION -->
+    <div class="prepared-by-container" id="preparedByContainer">
+        <span>ತಯಾರಕರು (Prepared By):</span>
+        <input type="text" id="preparedBy" value="" placeholder="ಹೆಸರು ನಮೂದಿಸಿ" oninput="checkPreparedBy()">
+    </div>
+    <div class="no-print" style="font-size: 11px; color: #64748b; margin-top: 4px;">
+        * ಮಾಹಿತಿಯು ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಉಳಿವು (Save) ಆಗುತ್ತದೆ.
+    </div>
+</div>
+
+<!-- CONSOLIDATED MARKS REGISTER SECTION (6 SUBJECTS) -->
+<div class="card" id="consolidatedSection">
+    <div class="card-title">
+        <span>📊 6 TO 8TH CONSOLIDATED MARKS REGISTER</span>
+        <button type="button" class="btn-a3 no-print" onclick="triggerPrint('consolidated')">🖨️ Print Consolidated Register (A3 Landscape)</button>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="background:#1e40af; color:white;">S.NO</th>
+                    <th rowspan="2" style="background:#1e40af; color:white;">STUDENT NAME</th>
+                    <th rowspan="2" style="background:#1e40af; color:white;">NO OF DAYS PRESENT</th>
+                    <th rowspan="2" style="background:#1e40af; color:white;">TOTAL SCHOOL DAYS</th>
+                    <th rowspan="2" style="background:#1e40af; color:white;">SEMESTER</th>
+                    <th rowspan="2" style="background:#1e40af; color:white;">EXAMS</th>
+                    <th rowspan="2" style="background:#1e40af; color:white;">PERCENTAGE</th>
+                    <th colspan="2" style="background:#1e40af; color:white;">KANNADA</th>
+                    <th colspan="2" style="background:#1e40af; color:white;">ENGLISH</th>
+                    <th colspan="2" style="background:#1e40af; color:white;">HINDI</th>
+                    <th colspan="2" style="background:#1e40af; color:white;">MATHEMATICS</th>
+                    <th colspan="2" style="background:#1e40af; color:white;">SCIENCE</th>
+                    <th colspan="2" style="background:#1e40af; color:white;">SOCIAL SCIENCE</th>
+                    <th colspan="3" style="background:#1e40af; color:white;">TOTAL</th>
+                    <th colspan="5" style="background:#1e40af; color:white;">CO-CURRICULAR ACTIVITIES GRADE</th>
+                    <th rowspan="2" style="background:#1e40af; color:white;">RESULT</th>
+                </tr>
+                <tr style="background:#1e40af; color:white;">
+                    <th>MARKS</th><th>GRADE</th>
+                    <th>MARKS</th><th>GRADE</th>
+                    <th>MARKS</th><th>GRADE</th>
+                    <th>MARKS</th><th>GRADE</th>
+                    <th>MARKS</th><th>GRADE</th>
+                    <th>MARKS</th><th>GRADE</th>
+                    <th>MARKS</th><th>%</th><th>GRADE</th>
+                    <th>PHYSICAL HEALTH</th>
+                    <th>ARTS & CRAFTS</th>
+                    <th>DANCE & MUSIC</th>
+                    <th>SUPW</th>
+                    <th>VALUE EDUCATION</th>
+                </tr>
+            </thead>
+            <tbody id="consolidatedBody">
+                <!-- Data populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="footer-credit">
+    Designed by : LAKSHMIKANTH R (Mob: 9844444871)
+</div>
+
+<script>
+    const DB_KEY = 'INTEGRATED_SCHOOL_MARKS_DB_6TO8_V2';
+
+    // 6th to 8th Weightages: FA1:10%, FA2:10%, SA1:30%, FA3:10%, FA4:10%, SA2:30%
+    const assessments = [
+        { id: 'FA-1', weight: 10 },
+        { id: 'FA-2', weight: 10 },
+        { id: 'SA-1', weight: 30 },
+        { id: 'FA-3', weight: 10 },
+        { id: 'FA-4', weight: 10 },
+        { id: 'SA-2', weight: 30 }
+    ];
+
+    const examStructure = [
+        { sem: 'SEM-1', exam: 'FA-1', weight: 10 },
+        { sem: 'SEM-1', exam: 'FA-2', weight: 10 },
+        { sem: 'SEM-1', exam: 'SA-1', weight: 30 },
+        { sem: 'SEM-1', exam: 'SEM-1', weight: 50, isTotal: true },
+        { sem: 'SEM-2', exam: 'FA-3', weight: 10 },
+        { sem: 'SEM-2', exam: 'FA-4', weight: 10 },
+        { sem: 'SEM-2', exam: 'SA-2', weight: 30 },
+        { sem: 'SEM-2', exam: 'SEM-2', weight: 50, isTotal: true },
+        { sem: 'SEM 1+2', exam: 'SEM 1+2', weight: 100, isFinal: true }
+    ];
+
+    const subjectsList = ['kannada', 'english', 'hindi', 'maths', 'science', 'social'];
+
+    function calculateGrade(obtained, max) {
+        if (!max || max <= 0) return 'C';
+        let pct = (obtained / max) * 100;
+        if (pct >= 90) return 'A+';
+        if (pct >= 70) return 'A';
+        if (pct >= 50) return 'B+';
+        if (pct >= 30) return 'B';
+        return 'C';
+    }
+
+    function loadDB() {
+        return JSON.parse(localStorage.getItem(DB_KEY)) || {};
+    }
+
+    function saveDB(data) {
+        localStorage.setItem(DB_KEY, JSON.stringify(data));
+        updateStudentDropdown();
+        renderDataSheet();
+        renderConsolidated();
+    }
+
+    function onClassChange() {
+        updateStudentDropdown();
+        renderDataSheet();
+        renderConsolidated();
+    }
+
+    // Handle + Add New Student Option
+    function handleStudentSelect(selectObj) {
+        const currentClass = document.getElementById('classSelect').value;
+        if (!currentClass) {
+            alert("ದಯವಿಟ್ಟು ಮೊದಲು ತರಗತಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ / Please select a class first!");
+            selectObj.value = "";
+            return;
+        }
+
+        if (selectObj.value === '__ADD_NEW__') {
+            const newName = prompt("ಹೊಸ ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು ನಮೂದಿಸಿ / Enter New Student Name:");
+            if (newName && newName.trim() !== '') {
+                const cleanName = newName.trim();
+                let db = loadDB();
+                if (!db[cleanName]) {
+                    db[cleanName] = { studentClass: currentClass, daysPresent: 210, totalDays: 220 };
+                    saveDB(db);
+                    selectObj.value = cleanName;
+                } else {
+                    alert("ಈ ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು ಈಗಾಗಲೇ ಲಭ್ಯವಿದೆ!");
+                    selectObj.value = cleanName;
+                }
+            } else {
+                selectObj.value = "";
+            }
+        }
+    }
+
+    function updateStudentDropdown() {
+        const db = loadDB();
+        const selectedClass = document.getElementById('classSelect').value;
+        const select = document.getElementById('studentSelect');
+        const currentVal = select.value;
+
+        select.innerHTML = `
+            <option value="">-- ವಿದ್ಯಾರ್ಥಿ ಆಯ್ಕೆಮಾಡಿ --</option>
+            <option value="__ADD_NEW__">+ ಹೊಸ ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸಿ (+ Add New Student)</option>
+        `;
+
+        Object.keys(db).forEach(name => {
+            if (!selectedClass || db[name].studentClass === selectedClass) {
+                const opt = document.createElement('option');
+                opt.value = name;
+                opt.textContent = name;
+                select.appendChild(opt);
+            }
+        });
+
+        if (db[currentVal]) {
+            select.value = currentVal;
+        }
+    }
+
+    function checkPreparedBy() {
+        const val = document.getElementById('preparedBy').value.trim();
+        const container = document.getElementById('preparedByContainer');
+        if (val === '') {
+            container.classList.add('hide-print');
+        } else {
+            container.classList.remove('hide-print');
+        }
+    }
+
+    // Editable Attendance Updates
+    function updateAttendance(studentName, field, value) {
+        let db = loadDB();
+        if (db[studentName]) {
+            db[studentName][field] = parseInt(value) || 0;
+            localStorage.setItem(DB_KEY, JSON.stringify(db));
+        }
+    }
+
+    function deleteStudent(name) {
+        if (confirm(`ನಿಮಗೆ ${name} ವಿವರಗಳನ್ನು ಅಳಿಸಲು ಇಷ್ಟವೇ?`)) {
+            let db = loadDB();
+            delete db[name];
+            saveDB(db);
+        }
+    }
+
+    // RENDER INDIVIDUAL DATA SHEET
+    function renderDataSheet() {
+        const db = loadDB();
+        const selectedClass = document.getElementById('classSelect').value;
+        const tbody = document.getElementById('dataSheetBody');
+        tbody.innerHTML = '';
+
+        let students = Object.keys(db);
+        if (selectedClass) {
+            students = students.filter(name => db[name].studentClass === selectedClass);
+        }
+
+        if (students.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="24" style="padding: 15px; color: #64748b;">ಯಾವ ದತ್ತಾಂಶವೂ ಲಭ್ಯವಿಲ್ಲ, ದಯವಿಟ್ಟು ಮೇಲಿನ ಫಾರ್ಮ್ ಬಳಸಿ ವಿದ್ಯಾರ್ಥಿಗಳ ಅಂಕಗಳನ್ನು ನಮೂದಿಸಿ.</td></tr>`;
+            return;
+        }
+
+        let count = 1;
+        students.forEach(name => {
+            const tr = document.createElement('tr');
+            let cells = `<td>${count++}</td><td style="text-align:left; font-weight:bold; padding-left:6px;">${name}</td>`;
+
+            let totalWeightPctSum = 0;
+            let totalEvaluatedCount = 0;
+
+            assessments.forEach(ass => {
+                let rec = null;
+                for (let sub of subjectsList) {
+                    if (db[name][sub] && db[name][sub][ass.id]) {
+                        rec = db[name][sub][ass.id];
+                        break;
+                    }
+                }
+
+                if (rec) {
+                    let weightPct = (rec.obtained / rec.max) * ass.weight;
+                    totalWeightPctSum += weightPct;
+                    totalEvaluatedCount++;
+
+                    let grade = calculateGrade(rec.obtained, rec.max);
+                    cells += `<td>${rec.obtained}</td><td>${weightPct.toFixed(1)}%</td><td>${grade}</td>`;
+                } else {
+                    cells += `<td>-</td><td>-</td><td>-</td>`;
+                }
+            });
+
+            // TOTAL 100% ASSESSMENT COLUMNS
+            if (totalEvaluatedCount > 0) {
+                let totalObtainedStr = totalWeightPctSum.toFixed(1);
+                let totalPctStr = totalWeightPctSum.toFixed(1) + '%';
+                let totalGrade = calculateGrade(totalWeightPctSum, 100);
+                let gradeColor = totalGrade === 'C' ? '#dc2626' : '#16a34a';
+
+                cells += `
+                    <td style="font-weight:bold;">${totalObtainedStr}</td>
+                    <td style="font-weight:bold;">${totalPctStr}</td>
+                    <td style="font-weight:bold; color:${gradeColor};">${totalGrade}</td>
+                `;
+            } else {
+                cells += `<td>-</td><td>-</td><td>-</td>`;
+            }
+
+            // Delete Action
+            cells += `<td><button class="delete-btn no-print" onclick="deleteStudent('${name}')" title="Delete Student">🗑️</button></td>`;
+
+            tr.innerHTML = cells;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // RENDER CONSOLIDATED REGISTER (6 Subjects)
+    function renderConsolidated() {
+        const db = loadDB();
+        const selectedClass = document.getElementById('classSelect').value;
+        const tbody = document.getElementById('consolidatedBody');
+        tbody.innerHTML = '';
+
+        let students = Object.keys(db);
+        if (selectedClass) {
+            students = students.filter(name => db[name].studentClass === selectedClass);
+        }
+
+        if (students.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="29" style="padding: 15px; color: #64748b;">No data available.</td></tr>`;
+            return;
+        }
+
+        let studentCount = 1;
+        students.forEach(name => {
+            const student = db[name];
+            const daysPresent = student.daysPresent || 210;
+            const totalDays = student.totalDays || 220;
+
+            examStructure.forEach((item, idx) => {
+                const tr = document.createElement('tr');
+                if (item.isTotal) tr.className = 'sem-row';
+                if (item.isFinal) tr.className = 'final-row';
+
+                let studentCells = '';
+                if (idx === 0) {
+                    studentCells = `
+                        <td rowspan="9">${studentCount}</td>
+                        <td rowspan="9" style="text-align:left; font-weight:bold; padding-left:6px;">${name}</td>
+                        <td rowspan="9">
+                            <input class="editable-input" type="number" value="${daysPresent}" onchange="updateAttendance('${name}', 'daysPresent', this.value)">
+                        </td>
+                        <td rowspan="9">
+                            <input class="editable-input" type="number" value="${totalDays}" onchange="updateAttendance('${name}', 'totalDays', this.value)">
+                        </td>
+                    `;
+                }
+
+                let subjectDataCells = '';
+                let grandExamTotal = 0;
+                let grandMaxTotal = 0;
+
+                subjectsList.forEach(sub => {
+                    let markObtained = 0;
+                    let maxMark = 50;
+
+                    if (!item.isTotal && !item.isFinal) {
+                        const rec = student[sub]?.[item.exam];
+                        markObtained = rec ? rec.obtained : 0;
+                        maxMark = rec ? rec.max : (item.exam.includes('SA') ? 30 : 10);
+                    } else if (item.exam === 'SEM-1') {
+                        let f1 = student[sub]?.['FA-1']?.obtained || 0;
+                        let f2 = student[sub]?.['FA-2']?.obtained || 0;
+                        let s1 = student[sub]?.['SA-1']?.obtained || 0;
+                        markObtained = f1 + f2 + s1;
+                        maxMark = 50;
+                    } else if (item.exam === 'SEM-2') {
+                        let f3 = student[sub]?.['FA-3']?.obtained || 0;
+                        let f4 = student[sub]?.['FA-4']?.obtained || 0;
+                        let s2 = student[sub]?.['SA-2']?.obtained || 0;
+                        markObtained = f3 + f4 + s2;
+                        maxMark = 50;
+                    } else if (item.exam === 'SEM 1+2') {
+                        let sem1 = (student[sub]?.['FA-1']?.obtained || 0) + (student[sub]?.['FA-2']?.obtained || 0) + (student[sub]?.['SA-1']?.obtained || 0);
+                        let sem2 = (student[sub]?.['FA-3']?.obtained || 0) + (student[sub]?.['FA-4']?.obtained || 0) + (student[sub]?.['SA-2']?.obtained || 0);
+                        markObtained = sem1 + sem2;
+                        maxMark = 100;
+                    }
+
+                    grandExamTotal += markObtained;
+                    grandMaxTotal += maxMark;
+
+                    let grade = calculateGrade(markObtained, maxMark);
+                    subjectDataCells += `<td>${markObtained}</td><td>${grade}</td>`;
+                });
+
+                let pct = grandMaxTotal > 0 ? ((grandExamTotal / grandMaxTotal) * 100).toFixed(1) : "0.0";
+                let overallGrade = calculateGrade(grandExamTotal, grandMaxTotal);
+
+                let cocurricularCells = '';
+                if (idx === 0 || idx === 6) {
+                    cocurricularCells = `
+                        <td><input class="editable-grade-input" type="text" value="A" maxlength="2"></td>
+                        <td><input class="editable-grade-input" type="text" value="A" maxlength="2"></td>
+                        <td><input class="editable-grade-input" type="text" value="A" maxlength="2"></td>
+                        <td><input class="editable-grade-input" type="text" value="A" maxlength="2"></td>
+                        <td><input class="editable-grade-input" type="text" value="A" maxlength="2"></td>
+                    `;
+                } else {
+                    cocurricularCells = `<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>`;
+                }
+
+                let resultCell = '';
+                if (item.isFinal) {
+                    let isPass = parseFloat(pct) >= 30;
+                    resultCell = `<td style="font-weight:bold; color: ${isPass ? '#16a34a' : '#dc2626'};">${isPass ? 'PASS' : 'FAIL'}</td>`;
+                } else {
+                    resultCell = `<td>-</td>`;
+                }
+
+                tr.innerHTML = `
+                    ${studentCells}
+                    <td>${item.sem}</td>
+                    <td>${item.exam}</td>
+                    <td>${item.weight}%</td>
+                    ${subjectDataCells}
+                    <td>${grandExamTotal}</td>
+                    <td>${pct}%</td>
+                    <td>${overallGrade}</td>
+                    ${cocurricularCells}
+                    ${resultCell}
+                `;
+
+                tbody.appendChild(tr);
+            });
+            studentCount++;
+        });
+    }
+
+    // FORM SUBMIT
+    document.getElementById('dataForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const selectedClass = document.getElementById('classSelect').value;
+        const name = document.getElementById('studentSelect').value;
+        const subject = document.getElementById('subjectSelect').value;
+        const assessment = document.getElementById('assessmentSelect').value;
+        const max = parseFloat(document.getElementById('maxMarks').value);
+        const obtained = parseFloat(document.getElementById('obtainedMarks').value);
+
+        if (!selectedClass) {
+            alert('ದಯವಿಟ್ಟು ತರಗತಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ!');
+            return;
+        }
+
+        if (!name || name === '__ADD_NEW__') {
+            alert('ದಯವಿಟ್ಟು ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ!');
+            return;
+        }
+
+        if (obtained > max) {
+            alert('ಪಡೆದ ಅಂಕವು ಗರಿಷ್ಠ ಅಂಕಕ್ಕಿಂತ ಹೆಚ್ಚಿರಬಾರದು!');
+            return;
+        }
+
+        let db = loadDB();
+        if (!db[name]) db[name] = { studentClass: selectedClass, daysPresent: 210, totalDays: 220 };
+        else db[name].studentClass = selectedClass;
+
+        if (!db[name][subject]) db[name][subject] = {};
+
+        db[name][subject][assessment] = { obtained: obtained, max: max };
+
+        saveDB(db);
+
+        alert(`✓ ದತ್ತಾಂಶ ಯಶಸ್ವಿಯಾಗಿ ಸೇವ್ ಆಗಿದೆ: ${name} (${selectedClass} - ${subject.toUpperCase()} - ${assessment})`);
+        document.getElementById('obtainedMarks').value = '';
+    });
+
+    function clearData() {
+        if (confirm('ಎಲ್ಲಾ ದತ್ತಾಂಶವನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿದ್ದೀರಾ?')) {
+            localStorage.removeItem(DB_KEY);
+            updateStudentDropdown();
+            renderDataSheet();
+            renderConsolidated();
+        }
+    }
+
+    function triggerPrint(type) {
+        checkPreparedBy();
+
+        let printStyle = document.getElementById('printPageSetup');
+        if (!printStyle) {
+            printStyle = document.createElement('style');
+            printStyle.id = 'printPageSetup';
+            document.head.appendChild(printStyle);
+        }
+
+        if (type === 'individual') {
+            document.body.className = 'print-individual';
+            printStyle.innerHTML = `@page { size: A4 landscape; margin: 8mm; }`;
+        } else {
+            document.body.className = 'print-consolidated';
+            printStyle.innerHTML = `@page { size: A3 landscape; margin: 6mm; }`;
+        }
+
+        window.print();
+        document.body.className = '';
+    }
+
+    window.onload = function() {
+        checkPreparedBy();
+        updateStudentDropdown();
+        renderDataSheet();
+        renderConsolidated();
+    };
+</script>
+
+</body>
+</html>
